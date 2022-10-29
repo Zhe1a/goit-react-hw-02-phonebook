@@ -13,16 +13,35 @@ class App extends Component {
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
     filter: '',
-    name: '',
-    number: '',
+  };
+  addTodo = options => {
+    this.setState(prev => ({ contacts: [...prev.contacts, options] }));
+  };
+  removeContact = id => {
+    this.setState(prev => ({
+      contacts: prev.contacts.filter(el => el.id !== id),
+    }));
+  };
+  onFilter = e => {
+    const { value } = e.target;
+    this.setState({ filter: value });
   };
 
+  onfilterContacts = () => {
+    const { filter, contacts } = this.state;
+    if (filter === '') return contacts;
+    const onFilterConst = contacts.filter(el => el.name.toLocaleLowerCase() == filter.toLocaleLowerCase());
+    return onFilterConst;
+  };
+  
   render() {
     return (
       <>
-        <ContactForm titel={'Phonebook'} />
-        <Filter titel={'Contacts'} />
-        <ContactList contacts={this.state.contacts} />
+        <h1>Phonebook</h1>
+        <ContactForm addTodo={this.addTodo} />
+        <h1>Contacts</h1>
+        <Filter filter={this.onFilter} filterContacts={this.onfilterContacts} />
+        <ContactList contacts={this.onfilterContacts()} remove={this.removeContact} />
       </>
     );
   }

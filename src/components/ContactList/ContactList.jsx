@@ -1,22 +1,33 @@
-import s from "./ContactList.module.css"
+import s from './ContactList.module.css';
 
 import PropTypes from 'prop-types';
 
-function ContactList({ contacts }) {
+function ContactList({ contacts, remove }) {
   return (
     <ul className={s.Item}>
-       {contacts.map(({ id, name, number }) => {
-    return (
-      <li className={s.list} key={id}>
-        {name} :{number}
-      </li>
-    );
-  })}
+      {contacts.map(({ id, name, number }) => {
+        return (
+          <li className={s.list} key={id}>
+            <p>
+              {name}: {number}
+            </p>
+            <button
+              id={id}
+              onClick={() => {
+                remove(id);
+              }}
+            >
+              Remove
+            </button>
+          </li>
+        );
+      })}
     </ul>
-  )
+  );
 }
 
 ContactList.propTypes = {
+  remove: PropTypes.func.isRequired,
   contacts: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,

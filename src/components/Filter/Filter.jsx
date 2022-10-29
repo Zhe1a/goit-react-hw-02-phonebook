@@ -1,17 +1,19 @@
-import s from "./Filter.module.css"
+import s from './Filter.module.css';
 
 import PropTypes from 'prop-types';
 
-function Filter({ titel }) {
+function Filter({ filter }) {
   return (
-    <div className={s["heder"]}>
-      <h2 className={s["titel"]}>{titel}</h2>
-      <input className={s["input"]}></input>
+    <div className={s['heder']}>
+      <input
+        className={s['input']}
+        onChange={e => {
+          filter(e);
+        }}
+      ></input>
     </div>
   );
 }
 
-Filter.propTypes = {
-  titel: PropTypes.string.isRequired,
-};
+Filter.propTypes = {};
 export default Filter;
