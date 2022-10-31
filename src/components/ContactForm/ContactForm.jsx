@@ -64,10 +64,5 @@ class ContactForm extends Component {
 }
 ContactForm.propTypes = {
   addTodo: PropTypes.func.isRequired,
-  name: PropTypes.string,
-  numder: PropTypes.number,
-  onForm: PropTypes.func,
-  handleSubmit: PropTypes.func,
-  reset: PropTypes.func,
 };
 export default ContactForm;

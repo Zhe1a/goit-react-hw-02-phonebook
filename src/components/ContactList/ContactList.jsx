@@ -12,7 +12,7 @@ function ContactList({ contacts, remove }) {
               {name}: {number}
             </p>
             <button
-            className={s.button}
+              className={s.button}
               id={id}
               onClick={() => {
                 remove(id);
@@ -35,7 +35,7 @@ ContactList.propTypes = {
       name: PropTypes.string.isRequired,
       number: PropTypes.string.isRequired,
     })
-  ),
+  ).isRequired,
 };
 
 export default ContactList;

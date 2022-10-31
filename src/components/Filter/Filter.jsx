@@ -2,10 +2,11 @@ import s from './Filter.module.css';
 
 import PropTypes from 'prop-types';
 
-function Filter({ filter }) {
+function Filter({ filter, value }) {
   return (
     <div className={s['heder']}>
       <input
+        value={value}
         className={s['input']}
         onChange={e => {
           filter(e);
@@ -17,5 +18,6 @@ function Filter({ filter }) {
 
 Filter.propTypes = {
   filter: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
 };
 export default Filter;
