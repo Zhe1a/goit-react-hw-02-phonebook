@@ -1,5 +1,5 @@
 import { Component } from 'react';
-
+import s from "./App.module.css"
 import ContactForm from './ContactForm';
 import Filter from './Filter';
 import ContactList from './ContactList';
@@ -15,7 +15,15 @@ class App extends Component {
     filter: '',
   };
   addTodo = options => {
-    this.setState(prev => ({ contacts: [...prev.contacts, options] }));
+    const {name ,number}= options
+    const {contacts}= this.state
+    if(contacts.find(contact => contact.name.toLowerCase() === name.toLowerCase())){
+      alert(`${name} is already in contacts.`);
+    } else if(contacts.find(contact => contact.number.toLowerCase() === number.toLowerCase())){
+      alert(`${number} is already in contacts.`);
+    } else {
+      this.setState(prev => ({ contacts: [...prev.contacts, options] }));
+    }
   };
   removeContact = id => {
     this.setState(prev => ({
@@ -30,18 +38,23 @@ class App extends Component {
   onfilterContacts = () => {
     const { filter, contacts } = this.state;
     if (filter === '') return contacts;
-    const onFilterConst = contacts.filter(el => el.name.toLocaleLowerCase() == filter.toLocaleLowerCase());
-    return onFilterConst;
+    const normalizedFilter = filter.toLowerCase();
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normalizedFilter),
+    );
   };
+
+
   
   render() {
+    const {addTodo,onFilter ,onfilterContacts,removeContact} = this
     return (
       <>
-        <h1>Phonebook</h1>
-        <ContactForm addTodo={this.addTodo} />
-        <h1>Contacts</h1>
-        <Filter filter={this.onFilter} filterContacts={this.onfilterContacts} />
-        <ContactList contacts={this.onfilterContacts()} remove={this.removeContact} />
+        <h1 className={s.titel}>Phonebook</h1>
+        <ContactForm addTodo={addTodo} />
+        <h2 className={s.titel}>Contacts</h2>
+        <Filter filter={onFilter} filterContacts={onfilterContacts} />
+        <ContactList contacts={onfilterContacts()} remove={removeContact} />
       </>
     );
   }

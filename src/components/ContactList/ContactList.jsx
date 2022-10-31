@@ -12,6 +12,7 @@ function ContactList({ contacts, remove }) {
               {name}: {number}
             </p>
             <button
+            className={s.button}
               id={id}
               onClick={() => {
                 remove(id);

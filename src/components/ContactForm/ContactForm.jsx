@@ -22,12 +22,14 @@ class ContactForm extends Component {
     this.setState({ name: '', number: '' });
   };
   render() {
+    const { handleSubmit, onForm } = this;
+    const { name, number } = this.state;
     return (
       <section className={s.ContactForm}>
         <form
           className={s['form']}
           onSubmit={e => {
-            this.handleSubmit(e);
+            handleSubmit(e);
           }}
         >
           <p className={s['text']}>Name</p>
@@ -38,8 +40,8 @@ class ContactForm extends Component {
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
-            value={this.state.name}
-            onChange={this.onForm}
+            value={name}
+            onChange={onForm}
           />
           <p className={s['text']}>Numder</p>
           <input
@@ -49,8 +51,8 @@ class ContactForm extends Component {
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
-            value={this.state.number}
-            onChange={this.onForm}
+            value={number}
+            onChange={onForm}
           />
           <button className={s['button']} type="sumdit">
             Add contact
@@ -62,5 +64,10 @@ class ContactForm extends Component {
 }
 ContactForm.propTypes = {
   addTodo: PropTypes.func.isRequired,
+  name: PropTypes.string,
+  numder: PropTypes.number,
+  onForm: PropTypes.func,
+  handleSubmit: PropTypes.func,
+  reset: PropTypes.func,
 };
 export default ContactForm;
