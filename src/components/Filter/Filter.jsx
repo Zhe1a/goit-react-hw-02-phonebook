@@ -2,7 +2,7 @@ import s from './Filter.module.css';
 
 import PropTypes from 'prop-types';
 
-function Filter({ filter, value }) {
+function Filter({ filter,value }) {
   return (
     <div className={s['heder']}>
       <input
